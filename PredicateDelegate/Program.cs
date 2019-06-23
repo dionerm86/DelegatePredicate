@@ -15,9 +15,9 @@ namespace PredicateDelegate
             list.Add(new Product("Xbox One X", 2200.00));
             list.Add(new Product("PS4", 2000.00));
 
-            //PredicateDelegate
+            #region PredicateDelegate
             list.RemoveAll(ProductTest);//Remover prod com preço > que 1900.00
-                                        //list.RemoveAll(p => p.Price >= 1900.00); Exemplo com lambida
+            //list.RemoveAll(p => p.Price >= 1900.00); Exemplo com lambida
 
             Console.WriteLine("Predicate Delegate:");
 
@@ -28,7 +28,9 @@ namespace PredicateDelegate
 
             Console.WriteLine();
 
-            //ActionDelegate
+            #endregion
+
+            #region ActionDelegate
             list.ForEach(UpdateProduct);// Exibir o produtos com 10% de acréscimo.
 
             Console.WriteLine("Action Delegate:");
@@ -50,10 +52,17 @@ namespace PredicateDelegate
 
                 list.ForEach(p => {p.Price =+ p.Price * 0.1});
             */
+            #endregion
 
-            //Exemplo de FuncDelegate
+            #region Exemplo de FuncDelegate
+
+            //Func<Product, string> func = p => p.Name.ToUpper();
+
+            //Func<Product, string> func = NameUpper; Outra forma de chamar o Func
+            //List<string> list2 = list.Select(func).ToList();
 
             List<string> list2 = list.Select(NameUpper).ToList();//Selecionar os elementos da lista e exibir em ToUpper
+            //List<string> list2 = list.Select(p => p.Name.ToUpper()).ToList(); Lambda InLine
 
             Console.WriteLine("Func Delegate:");
 
@@ -62,10 +71,14 @@ namespace PredicateDelegate
                 Console.WriteLine(s);
             }
 
+            #endregion
+
             Console.ReadLine();
 
 
         }
+
+        #region Funções Delegate
         //Função para retornar o PredicateDelegate
         public static bool ProductTest(Product p)
         {
@@ -83,5 +96,7 @@ namespace PredicateDelegate
         {
             return p.Name.ToUpper();
         }
+
+        #endregion
     }
 }
